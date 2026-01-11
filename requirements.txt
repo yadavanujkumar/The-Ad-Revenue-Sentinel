@@ -32,7 +32,6 @@ kafka-python==2.0.2
 
 # Database
 sqlalchemy==2.0.23
-sqlite3  # Built-in with Python
 
 # Utilities
 python-dotenv==1.0.0

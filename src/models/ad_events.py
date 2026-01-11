@@ -2,7 +2,7 @@
 Data models for ad events
 """
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, Field, validator
 
 
@@ -74,5 +74,5 @@ class ValidationAlert(BaseModel):
     alert_type: str  # "bot_traffic", "negative_revenue", "anomaly"
     severity: str  # "low", "medium", "high"
     description: str
-    affected_events: list[str]
+    affected_events: List[str]
     metadata: dict = {}

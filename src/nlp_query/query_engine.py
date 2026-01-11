@@ -41,7 +41,7 @@ class NLQueryEngine:
             return 'revenue_by_region'
         elif 'revenue' in query_lower and 'device' in query_lower:
             return 'revenue_by_device'
-        elif 'click' in query_lower and 'rate' in query_lower or 'ctr' in query_lower:
+        elif ('click' in query_lower and 'rate' in query_lower) or 'ctr' in query_lower:
             return 'click_through_rate'
         elif 'conversion' in query_lower and 'rate' in query_lower:
             return 'conversion_rate'
