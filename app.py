@@ -294,8 +294,8 @@ elif page == "Data Ingestion":
                     alerts = st.session_state.validator.validate_impression(impression)
                     
                     # Store
-                    st.session_state.impressions.append(impression.dict())
-                    st.session_state.alerts.extend([alert.dict() for alert in alerts])
+                    st.session_state.impressions.append(impression.model_dump())
+                    st.session_state.alerts.extend([alert.model_dump() for alert in alerts])
                     
                     st.success(f"✅ Impression added! Event ID: {impression.event_id}")
                     if alerts:
@@ -335,8 +335,8 @@ elif page == "Data Ingestion":
                         alerts = st.session_state.validator.validate_click(click)
                         
                         # Store
-                        st.session_state.clicks.append(click.dict())
-                        st.session_state.alerts.extend([alert.dict() for alert in alerts])
+                        st.session_state.clicks.append(click.model_dump())
+                        st.session_state.alerts.extend([alert.model_dump() for alert in alerts])
                         
                         st.success(f"✅ Click added! Event ID: {click.event_id}")
                         if alerts:
@@ -381,8 +381,8 @@ elif page == "Data Ingestion":
                         alerts = st.session_state.validator.validate_conversion(conversion)
                         
                         # Store
-                        st.session_state.conversions.append(conversion.dict())
-                        st.session_state.alerts.extend([alert.dict() for alert in alerts])
+                        st.session_state.conversions.append(conversion.model_dump())
+                        st.session_state.alerts.extend([alert.model_dump() for alert in alerts])
                         
                         st.success(f"✅ Conversion added! Event ID: {conversion.event_id}")
                         if alerts:
@@ -657,17 +657,17 @@ elif page == "Sample Data Generator":
             for imp in impressions:
                 imp_obj = AdImpression(**imp)
                 alerts = validator.validate_impression(imp_obj)
-                all_alerts.extend([alert.dict() for alert in alerts])
+                all_alerts.extend([alert.model_dump() for alert in alerts])
             
             for clk in clicks:
                 clk_obj = AdClick(**clk)
                 alerts = validator.validate_click(clk_obj)
-                all_alerts.extend([alert.dict() for alert in alerts])
+                all_alerts.extend([alert.model_dump() for alert in alerts])
             
             for conv in conversions:
                 conv_obj = AdConversion(**conv)
                 alerts = validator.validate_conversion(conv_obj)
-                all_alerts.extend([alert.dict() for alert in alerts])
+                all_alerts.extend([alert.model_dump() for alert in alerts])
             
             # Store in session state
             st.session_state.impressions.extend(impressions)

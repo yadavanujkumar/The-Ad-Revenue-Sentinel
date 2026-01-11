@@ -139,9 +139,9 @@ def demo_causal_analysis(impressions, clicks, conversions):
     
     # Prepare data
     print("Preparing data for causal analysis...")
-    impressions_dict = [imp.dict() for imp in impressions]
-    clicks_dict = [clk.dict() for clk in clicks]
-    conversions_dict = [conv.dict() for conv in conversions]
+    impressions_dict = [imp.model_dump() for imp in impressions]
+    clicks_dict = [clk.model_dump() for clk in clicks]
+    conversions_dict = [conv.model_dump() for conv in conversions]
     
     data = causal_engine.prepare_data(impressions_dict, clicks_dict, conversions_dict)
     print(f"✓ Prepared {len(data)} events")
@@ -194,9 +194,9 @@ def demo_drift_monitoring(impressions, clicks, conversions):
     causal_engine = CausalEngine()
     
     # Prepare data
-    impressions_dict = [imp.dict() for imp in impressions]
-    clicks_dict = [clk.dict() for clk in clicks]
-    conversions_dict = [conv.dict() for conv in conversions]
+    impressions_dict = [imp.model_dump() for imp in impressions]
+    clicks_dict = [clk.model_dump() for clk in clicks]
+    conversions_dict = [conv.model_dump() for conv in conversions]
     
     data = causal_engine.prepare_data(impressions_dict, clicks_dict, conversions_dict)
     
@@ -249,9 +249,9 @@ def demo_nl_query(impressions, clicks, conversions):
     causal_engine = CausalEngine()
     
     # Prepare data
-    impressions_dict = [imp.dict() for imp in impressions]
-    clicks_dict = [clk.dict() for clk in clicks]
-    conversions_dict = [conv.dict() for conv in conversions]
+    impressions_dict = [imp.model_dump() for imp in impressions]
+    clicks_dict = [clk.model_dump() for clk in clicks]
+    conversions_dict = [conv.model_dump() for conv in conversions]
     
     data = causal_engine.prepare_data(impressions_dict, clicks_dict, conversions_dict)
     

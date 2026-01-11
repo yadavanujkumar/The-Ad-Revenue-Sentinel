@@ -7,6 +7,11 @@ from typing import List
 import uvicorn
 from datetime import datetime
 import json
+import sys
+from pathlib import Path
+
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.models.ad_events import AdImpression, AdClick, AdConversion, ValidationAlert
 from src.data_validation.validator import DataValidator
@@ -51,17 +56,17 @@ async def ingest_impression(impression: AdImpression):
         alerts = validator.validate_impression(impression)
         
         # Store impression
-        impressions_store.append(impression.dict())
+        impressions_store.append(impression.model_dump())
         
         # Store alerts if any
         if alerts:
             for alert in alerts:
-                alerts_store.append(alert.dict())
+                alerts_store.append(alert.model_dump())
         
         return {
             "status": "success",
             "event_id": impression.event_id,
-            "alerts": [alert.dict() for alert in alerts],
+            "alerts": [alert.model_dump() for alert in alerts],
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
@@ -78,17 +83,17 @@ async def ingest_click(click: AdClick):
         alerts = validator.validate_click(click)
         
         # Store click
-        clicks_store.append(click.dict())
+        clicks_store.append(click.model_dump())
         
         # Store alerts if any
         if alerts:
             for alert in alerts:
-                alerts_store.append(alert.dict())
+                alerts_store.append(alert.model_dump())
         
         return {
             "status": "success",
             "event_id": click.event_id,
-            "alerts": [alert.dict() for alert in alerts],
+            "alerts": [alert.model_dump() for alert in alerts],
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
@@ -105,17 +110,17 @@ async def ingest_conversion(conversion: AdConversion):
         alerts = validator.validate_conversion(conversion)
         
         # Store conversion
-        conversions_store.append(conversion.dict())
+        conversions_store.append(conversion.model_dump())
         
         # Store alerts if any
         if alerts:
             for alert in alerts:
-                alerts_store.append(alert.dict())
+                alerts_store.append(alert.model_dump())
         
         return {
             "status": "success",
             "event_id": conversion.event_id,
-            "alerts": [alert.dict() for alert in alerts],
+            "alerts": [alert.model_dump() for alert in alerts],
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
